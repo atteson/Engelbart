@@ -8,19 +8,43 @@
     <body>
 	<table class="bordered">
 	    <tr><td>
-		<table>
-		    <tr>
-			<td>Variables:</td>
-			<td  id="variablesbox" style="visibility:hidden">
-			    <div id="variablesmath">$$ $$</div>
-			</td>
-		    </tr>
+		<table class="bordered">
+		    <tr><td>
+			<table>
+			    <tr>
+				<td>Variables:</td>
+				<td id="variablesbox" style="visibility:hidden">
+				    <div id="variablesmath">$$ $$</div>
+				</td>
+			    </tr>
+			</table>
+			<table>
+			    <tr>
+				<td><input type="text" id="newvariable"/></td>
+				<td><button type="button" onclick="addItem(0)">Add variable</button></td>
+			    </tr>
+			</table>
+		    </td></tr>
 		</table>
-		<table>
-		    <tr>
-			<td><input type="text" id="newvariable"/></td>
-			<td><button type="button" onclick="addVariable()">Add variable</button></td>
-		    </tr>
+	    </td></tr>
+	    <tr><td>
+		<table class="bordered">
+		    <tr><td>
+			<table>
+			    <tr>
+				<td>Operators:</td>
+				<td id="operatorsbox" style="visibility:hidden">
+				    <div id="operatorsmath">$$ $$</div>
+				</td>
+			    </tr>
+			</table>
+			<table>
+			    <tr>
+				<td><input type="text" id="newoperator"/></td>
+				<td><button type="button" onclick="addItem(1)">Add operator</button></td>
+			    </tr>
+			</table>
+		    </td></tr>
 		</table>
 	    </td></tr>
 	</table>
