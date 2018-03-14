@@ -31,7 +31,7 @@ function addItem(i) {
     //  Get the element jax when MathJax has produced it.
     //
     QUEUE.Push(function () {
-	for( i in [1,2] ) {
+	for( i=0; i < itemnames.length; i++ ) {
 	    itemmaths[i] = MathJax.Hub.getAllJax(itemnames[i] + "smath")[0];
 	    itemboxes[i] = document.getElementById(itemnames[i] + "sbox");
 	    SHOWBOX(i); // box is initially hidden so the braces don't show
