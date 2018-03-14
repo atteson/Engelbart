@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<script type="text/javascript" src="MathJax/MathJax.js?config=TeX-AMS_CHTML-full"></script>
+	<script type="text/javascript" src="termrewriting.js"></script>
+	<link rel="stylesheet" type="text/css" href="termrewriting.css"/>
+    </head>
+    <body>
+	<table class="bordered">
+	    <tr><td>
+		<table>
+		    <tr>
+			<td>Variables:</td>
+			<td  id="variablesbox" style="visibility:hidden">
+			    <div id="variablesmath">$$ $$</div>
+			</td>
+		    </tr>
+		</table>
+		<table>
+		    <tr>
+			<td><input type="text" id="newvariable"/></td>
+			<td><button type="button" onclick="addVariable()">Add variable</button></td>
+		    </tr>
+		</table>
+	    </td></tr>
+	</table>
+    </body>
+</html>
