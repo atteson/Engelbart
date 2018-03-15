@@ -34,8 +34,8 @@ function addItem(event, i) {
     //
     QUEUE.Push(function () {
 	for( i=0; i < itemnames.length; i++ ) {
-	    itemmaths[i] = MathJax.Hub.getAllJax(itemnames[i] + "smath")[0];
-	    itemboxes[i] = document.getElementById(itemnames[i] + "sbox");
+	    itemmaths.push( MathJax.Hub.getAllJax(itemnames[i] + "smath")[0] );
+	    itemboxes.push( document.getElementById(itemnames[i] + "sbox") );
 	    SHOWBOX(i); // box is initially hidden so the braces don't show
 	}
     });
