@@ -6,11 +6,13 @@ var itemnames = ["variable","operator"]
 var itemmaths = []
 var itemboxes = []
 
-function addItem(i) {
-    var newitem = document.getElementById( "new" + itemnames[i] )
-    items[i].push( newitem.value )
-    newitem.value = ""
-    window.UpdateMath( i )
+function addItem(event, i) {
+    if( event.keyCode == 13 ) {
+	var newitem = document.getElementById( "new" + itemnames[i] )
+	items[i].push( newitem.value )
+	newitem.value = ""
+	window.UpdateMath( i )
+    }
 }
 
 //

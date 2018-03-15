@@ -20,8 +20,7 @@
 			</table>
 			<table>
 			    <tr>
-				<td><input type="text" id="newvariable"/></td>
-				<td><button type="button" onclick="addItem(0)">Add variable</button></td>
+				<td><input type="text" id="newvariable" onkeyup="addItem(event,0)" /></td>
 			    </tr>
 			</table>
 		    </td></tr>
@@ -40,8 +39,7 @@
 			</table>
 			<table>
 			    <tr>
-				<td><input type="text" id="newoperator"/></td>
-				<td><button type="button" onclick="addItem(1)">Add operator</button></td>
+				<td><input type="text" id="newoperator" onkeyup="addItem(event,1)" /></td>
 			    </tr>
 			</table>
 		    </td></tr>
