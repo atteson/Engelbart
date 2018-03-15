@@ -5,13 +5,29 @@ var items = [[],[]]
 var itemnames = ["variable","operator"]
 var itemmaths = []
 var itemboxes = []
+var itemcommas = [true,false]
 
 function addItem(event, i) {
     if( event.keyCode == 13 ) {
 	var newitem = document.getElementById( "new" + itemnames[i] )
 	items[i].push( newitem.value )
 	newitem.value = ""
-	window.UpdateMath( i )
+	if( itemcommas[i] ) {
+	    window.UpdateMath( i )
+	} else {
+	    var table = document.getElementById( itemnames[i] + "s" )
+	    var cell = table.insertRow().insertCell()
+	    cell.innerHTML = "$$" + items[i][items[i].length-1] + "$$"
+	    window.BuildMath( i, cell )
+	}
+    }
+}
+
+function addCell(event, i) {
+    if( event.keyCode == 13 ) {
+	var newitem = document.getElementById( "new" + itemnames[i] )
+	items[i].push( newitem.value )
+	newitem.value = ""
     }
 }
 
@@ -21,7 +37,6 @@ function addItem(event, i) {
 //
 (function () {
     var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
-    var math = null, box = null;    // the element jax for the math output, and the box it's in
 
     //
     //  Hide and show the box (so it doesn't flicker as much)
@@ -34,9 +49,14 @@ function addItem(event, i) {
     //
     QUEUE.Push(function () {
 	for( i=0; i < itemnames.length; i++ ) {
-	    itemmaths.push( MathJax.Hub.getAllJax(itemnames[i] + "smath")[0] );
-	    itemboxes.push( document.getElementById(itemnames[i] + "sbox") );
-	    SHOWBOX(i); // box is initially hidden so the braces don't show
+	    if( itemcommas[i] ) {
+		itemmaths.push( MathJax.Hub.getAllJax(itemnames[i] + "smath")[0] );
+		itemboxes.push( document.getElementById(itemnames[i] + "sbox") );
+		SHOWBOX(i); // box is initially hidden so the braces don't show
+	    } else {
+		itemmaths.push( null )
+		itemboxes.push( null )
+	    }
 	}
     });
 
@@ -51,6 +71,12 @@ function addItem(event, i) {
             ["resetEquationNumbers",MathJax.InputJax.TeX],
             ["Text",itemmaths[i],"\\displaystyle{"+items[i].join()+"}"],
             [SHOWBOX,i]
+	);
+    }
+    window.BuildMath = function (i, cell) {
+	QUEUE.Push(
+            ["resetEquationNumbers",MathJax.InputJax.TeX],
+            ["Typeset",MathJax.Hub,cell],
 	);
     }
 })();
