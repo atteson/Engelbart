@@ -3,9 +3,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML-full"></script>
     <script>
       function log(event) {
-          console.log("testing")
+          if( event.keyCode === 13 )
+              document.getElementById('math').innerHTML =
+                  '$$' + event.srcElement.value + '$$'
       }
-      log(0)
     </script>
   </head>
   <body>
@@ -15,7 +16,7 @@
 	    <textarea onkeyup="log(event)">\alpha + \beta</textarea>
 	  </form>
       </td></tr>
-      <tr><td>
+      <tr><td id="math">
 	  $$\alpha + \beta$$
       </td></tr>
     </table>
