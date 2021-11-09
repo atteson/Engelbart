@@ -35,7 +35,7 @@ function addCell(event, i) {
 //  Use a closure to hide the local variables from the
 //  global namespace
 //
-(function () {
+function init() {
     var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
 
     //
@@ -48,16 +48,16 @@ function addCell(event, i) {
     //  Get the element jax when MathJax has produced it.
     //
     QUEUE.Push(function () {
-	for( i=0; i < itemnames.length; i++ ) {
-	    if( itemcommas[i] ) {
-		itemmaths.push( MathJax.Hub.getAllJax(itemnames[i] + "smath")[0] );
-		itemboxes.push( document.getElementById(itemnames[i] + "sbox") );
-		SHOWBOX(i); // box is initially hidden so the braces don't show
-	    } else {
-		itemmaths.push( null )
-		itemboxes.push( null )
-	    }
-	}
+        for( i=0; i < itemnames.length; i++ ) {
+            if( itemcommas[i] ) {
+            itemmaths.push( MathJax.Hub.getAllJax(itemnames[i] + "smath")[0] );
+            itemboxes.push( document.getElementById(itemnames[i] + "sbox") );
+            SHOWBOX(i); // box is initially hidden so the braces don't show
+            } else {
+            itemmaths.push( null )
+            itemboxes.push( null )
+            }
+        }
     });
 
     //
@@ -79,4 +79,7 @@ function addCell(event, i) {
             ["Typeset",MathJax.Hub,cell],
 	);
     }
-})();
+}
+
+init()
+

@@ -2,45 +2,46 @@
 <html>
     <head>
       <!--	<script type="text/javascript" src="MathJax/MathJax.js?config=TeX-AMS_CHTML-full"></script>-->
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>      
-	<script type="text/javascript" src="termrewriting.js"></script>
-	<link rel="stylesheet" type="text/css" href="termrewriting.css"/>
+      	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'></script>      
+		<script src="termrewriting.js"></script>
+		<link rel="stylesheet" type="text/css" href="termrewriting.css"/>
     </head>
     <body>
-	<table class="bordered">
-	    <tr><td>
 		<table class="bordered">
-		    <tr><td>
-			<table>
-			    <tr>
-				<td><b>Variables:</b></td>
-				<td id="variablesbox" style="visibility:hidden">
-				    <div id="variablesmath">$$ $$</div>
-				</td>
-			    </tr>
+			<tr><td>
+			<table class="bordered">
+				<tr><td>
+				<table>
+					<tr>
+					<td><b>Variables:</b></td>
+					<td id="variablesbox" style="visibility:hidden">
+						<div id="variablesmath">$$ $$</div>
+					</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+					<td><input type="text" id="newvariable" onkeyup="addItem(event,0)" /></td>
+					</tr>
+				</table>
+				</td></tr>
 			</table>
-			<table>
-			    <tr>
-				<td><input type="text" id="newvariable" onkeyup="addItem(event,0)" /></td>
-			    </tr>
+			</td></tr>
+			<tr><td>
+			<table class="bordered">
+				<tr><td>
+				<table id="operators">
+					<tr><td><b>Operators:</b></td></tr>
+				</table>
+				<table>
+					<tr>
+					<td><input type="text" id="newoperator" onkeyup="addItem(event,1)" /></td>
+					</tr>
+				</table>
+				</td></tr>
 			</table>
-		    </td></tr>
+			</td></tr>
 		</table>
-	    </td></tr>
-	    <tr><td>
-		<table class="bordered">
-		    <tr><td>
-			<table id="operators">
-			    <tr><td><b>Operators:</b></td></tr>
-			</table>
-			<table>
-			    <tr>
-				<td><input type="text" id="newoperator" onkeyup="addItem(event,1)" /></td>
-			    </tr>
-			</table>
-		    </td></tr>
-		</table>
-	    </td></tr>
-	</table>
+		$$\alpha+\beta$$
     </body>
 </html>
