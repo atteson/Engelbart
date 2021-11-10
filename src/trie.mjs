@@ -21,7 +21,7 @@ class Trie {
             return this.member
         let c = s.charCodeAt(0)
         if( this.p.hasOwnProperty(c) )
-            return this.ismember( this.p[c], s.slice(1) )
+            return this.p[c].ismember( s.slice(1) )
         return false
     }
 
@@ -30,7 +30,7 @@ class Trie {
             return this.member
         let c = s.charCodeAt(0)
         if( this.p.hasOwnProperty(c) )
-            return this.hasprefix( this.p[c], s.slice(1) )
+            return this.p[c].hasprefix( s.slice(1) )
         return this.member
     }
 }
