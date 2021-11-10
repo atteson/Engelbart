@@ -10,9 +10,24 @@ var itemboxes = []
 var variables = []
 var operators = []
 var rules = []
-var tokens = {}
 var variablesmath
 var variablesbox
+
+class Trie {
+    constructor() {
+        this.p = []
+    }
+
+    push( s ) {
+        let c = s.charCodeAt(0)
+        if( !this.p.hasOwnProperty(c) ) {
+            this.p[c] = new Trie()
+        }
+        if( s.length > 1 ) {
+            this.p[c].push( s.slice(1) )
+        }
+    }
+}
 
 function addVariable(event) {
     if( event.keyCode == 13 ) {
