@@ -12,29 +12,22 @@ var operators = []
 var rules = []
 var variablesmath
 var variablesbox
+var newvariable
 
-class Trie {
-    constructor() {
-        this.p = []
-    }
-
-    push( s ) {
-        let c = s.charCodeAt(0)
-        if( !this.p.hasOwnProperty(c) ) {
-            this.p[c] = new Trie()
-        }
-        if( s.length > 1 ) {
-            this.p[c].push( s.slice(1) )
-        }
-    }
-}
+var tokens = new Trie()
 
 function addVariable(event) {
     if( event.keyCode == 13 ) {
-        var newitem = document.getElementById( "newvariable" )
-        variables.push( newitem.value )
-        newitem.value = ""
-        window.UpdateVariables()
+        var variable = newvariable.value
+
+        newvariable.value = ""
+        if (tokens.hasprefix(variable))
+            alert( "Prefix of variable already exists!")
+        else {
+            tokens.push(variable)
+            variables.push( variable )
+            window.UpdateVariables()
+        }
     }
 }
 
@@ -81,6 +74,7 @@ function init() {
     QUEUE.Push(function () {
         variablesmath = MathJax.Hub.getAllJax("variablesmath")[0]
         variablesbox = document.getElementById("variablesbox")
+        newvariable = document.getElementById( "newvariable" )
         SHOWBOX(variablesbox)
     });
 
