@@ -1,86 +1,96 @@
-class SuffixTreeNode {
-    constructor() {
-        this.children = []
-        this.left = 0
-        this.right = 0
-        this.suffix_link = 0
-    }
-
-    add_child( a, node ) {
-        node = new SuffixTreeNode()
-        this.children[a] = node
-        node.suffix_link
-    }
-}
-
-class SuffixTreeImplicitNode {
-    constructor( v, alpha ) {
-        this.v = v
-        this.alpha = alpha
-    }
-
-    has_child(t, a) {
-        if( this.alpha == this.v.right ) 
-            return this.v.children.hasOwnProperty(a)
-        else
-            return t.s[this.alpha] == a
-    }
-
-    set_to_child(u, a) {
-        if( u.alpha == u.v.right ) {
-            this.v = u.v.children[a]
-            this.alpha = u.v.left
-        } else {
-            this.alpha = u.alpha + 1
-        }
-    }
-
-    at_root()
-        return this.v != 0
-
-    set_to_suffix(t)
-        this.v = t.suffix_links[this.v]
-}
-
+const infinity = -1
+  
 class SuffixTree {
     constructor() {
-        this.nodes = [new SuffixTreeNode()]
-        this.v = new SuffixTreeImplicitNode( this.nodes[0], 0 )
-        this.alpha = 0
-        this.s = []
-        this.u = new SuffixTreeImplicitNode( this.nodes[0], 0 ) // scratch space
+        this.bottom = 0
+        this.root = 1
+        this.num_nodes = 1 
+        this.gprime = []
+        this.fprime = [undefined, 0]
+        this.t = ""
     }
 
-    push( s ) {
-        this.s.concat(s)
-        if() this.v == 0 ) {
-            // this is the first non-root node we're inserting into the tree
-            n = length(this.nodes)
-            node = new SuffixTreeNode()
-            node.right = 1
-            this.nodes[n] = node
-            this.v.children[s[0]] = node
-            this.suffix_links[n] = node
+    new_node() {
+        return ++this.num_nodes
+    }
+
+    set_transition( s, k, l, r ) {
+        if( !this.gprime.hasOwnProperty( s ) )
+            this.gprime[s] = new Map()
+        this.gprime[s][this.t[k]] = [k, l, r]
+    }
+
+    get_transition( s, t ) {
+        if( this.gprime.hasOwnProperty(s) )
+            return s.gprime[s][t]
+        else if( s == 0 ) {
+            this.t[-t] = t
+            return [-t,-t,1]
+        } else
+            return undefined
+    }
+
+    update( s, k, i) {
+        oldr = this.root
+        [end_point, r] = this.test_and_split( s, k, i-1, this.t[i] )
+        while( !end_point ) {
+            rprime = this.new_node()
+            this.set_transition( r, i, infinity, rprime )
+            if( oldr != root )
+                this.fprime[oldr] = r
+            oldr = r
+            [s,k] = this.cannonize( this.fprime[s], k, i-1 )
+            [end_point, r] = this.test_and_split( s, k, i-1, this.t[i] )
         }
-        for(let i = 1; i < length(a); i++) {
-            a = s[i]
-            if( this.v.has_child( this, a ) ) {
-                this.v.set_to_child( this.v, a )
-            } else {
-                this.u.assign( this.v )
-                while( !this.u.has_child( this, a ) ) {
-                    this.add_child( this.u, a )    
-                    if( !this.u.at_root() )
-                        break
-                    else
-                        this.u.set_to_suffix(this)
-                }
+        if( oldr != r )
+            this.fprime[oldr] = s
+        return [s,k]
+    }
+
+    test_and_split( s, k, p, t ) {
+        if( k <= p ) {
+            [sprime, kprime, pprime] = this.get_transition( s, t )
+            if( t == this.t[kprime + p - k + 1] )
+                return [true, s]
+            else {
+                r = this.new_node()
+                this.set_transition( s, kprime, kprime + p - k, r )
+                this.set_transition( r, kprime + p - k + 1, pprime, sprime )
+                return [false, r]
             }
+        } else
+            if( this.get_transition( s, t ) == undefined )
+                return [false, r]
+            else
+                return [true, s]
+    }
+
+    cannonize( s, k, p ) {
+        if( p < k )
+            return [s,k]
+        else {
+            [kprime, pprime, sprime] = this.get_transition( s, this.t[k] )
+            while( pprime - kprime <= p - k ) {
+                k = k + pprime - kprime + 1
+                s = sprime
+                if( k <= p )
+                    [kprime, pprime, sprime] = this.get_transition( s, this.t[k] )
+            }
+            return [s,k]
         }
     }
 
-    find( a ) {
-
+    push( t ) {
+        s = 1
+        k = this.t.length
+        i = k-1
+        this.t += t + '\0'
+        while( this.t[i+1] != '\0' ) {
+            i += 1
+            [s, k] = this.update( s, k, i )
+            [s, k] = this.cannonize( s, i, k )
+        }
     }
 }
 
+export { SuffixTree }
