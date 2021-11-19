@@ -3,13 +3,13 @@
         <script type="module">
             console.log(window.location.pathname)
             import { SuffixTree } from './suffix_tree.js'
-            window.addEventListener( 'load', (event) => {
+ //           window.addEventListener( 'load', (event) => {
                 console.log( "loaded" )
                 document.getElementById("output").innerHTML += "module<br>"
                 var st = new SuffixTree()
-                st.push( "ababbababbab")
+                st.concat( [1,2,1,2,2,1,2] )
     //            document.getElementById("output").innerHTML += "added " + st.num_nodes.toString() + " nodes<br>"
-            } )
+//            } )
         </script>
     </head>
     <body>

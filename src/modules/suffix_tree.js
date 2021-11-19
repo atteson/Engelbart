@@ -39,8 +39,10 @@ export class SuffixTree {
             if( oldr != this.root )
                 this.fprime[oldr] = r
             oldr = r
-            [s,k] = this.cannonize( this.fprime[s], k, i-1 )
-            [end_point, r] = this.test_and_split( s, k, i-1, this.t[i] )
+            var x = this.cannonize( this.fprime[s], k, i-1 )
+            [s,k] = x
+            x = this.test_and_split( s, k, i-1, this.t[i] )
+            [end_point, r] = x
         }
         if( oldr != r )
             this.fprime[oldr] = s
@@ -80,12 +82,13 @@ export class SuffixTree {
         }
     }
 
-    push( t ) {
+    concat( t ) {
         var s = 1
         var k = this.t.length
         var i = k-1
-        this.t += t + '\0'
-        while( this.t[i+1] != '\0' ) {
+        t.push( 0 )
+        this.t.concat( t )
+        while( this.t[i+1] != 0 ) {
             i += 1
             [s, k] = this.update( s, k, i )
             [s, k] = this.cannonize( s, i, k )
