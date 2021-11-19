@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "name": "test",
+            "request": "launch",
+            "url": "http://localhost/~atteson/src/test/index.html",
+            "webRoot": "${workspaceFolder}/src"
+        },
+    ]}
