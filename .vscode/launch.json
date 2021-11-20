@@ -4,7 +4,9 @@
             "type": "pwa-chrome",
             "name": "test",
             "request": "launch",
-            "url": "http://localhost/~atteson/src/test/index.html",
-            "webRoot": "${workspaceFolder}/src"
-        },
-    ]}
+            "url": "http://localhost/atteson/src/test/index.html",
+            "pathMapping": {
+                "/atteson/src": "${workspaceFolder}/src"
+            }
+        }
+     ] }
