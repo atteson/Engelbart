@@ -4,9 +4,9 @@
             "type": "pwa-chrome",
             "name": "test",
             "request": "launch",
-            "url": "http://localhost/atteson/src/test/index.html",
+            "url": "http://localhost/~atteson/src/test/index.html",
             "pathMapping": {
-                "/atteson/src": "${workspaceFolder}/src"
+                "/~atteson/src": "${workspaceFolder}/src"
             }
         }
      ] }
