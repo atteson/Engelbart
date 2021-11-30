@@ -1,4 +1,4 @@
-const infinity = -1
+const infinity = Number.MAX_SAFE_INTEGER
   
 export class SuffixTree {
     constructor() {
@@ -24,7 +24,6 @@ export class SuffixTree {
         if( this.gprime.hasOwnProperty(s) )
             return this.gprime[s][t];
         else if( s == 0 ) {
-            this.t[-t] = t;
             return [-t,-t,1];
         } else
             return undefined;
@@ -49,11 +48,11 @@ export class SuffixTree {
 
     test_and_split( s, k, p, t ) {
         if( k <= p ) {
-            [sprime, kprime, pprime] = this.get_transition( s, t );
+            var [kprime, pprime, sprime] = this.get_transition( s, this.t[k] );
             if( t == this.t[kprime + p - k + 1] )
                 return [true, s];
             else {
-                r = this.new_node();
+                var r = this.new_node();
                 this.set_transition( s, kprime, kprime + p - k, r );
                 this.set_transition( r, kprime + p - k + 1, pprime, sprime );
                 return [false, r];
@@ -69,8 +68,8 @@ export class SuffixTree {
         if( p < k )
             return [s,k];
         else {
-            [kprime, pprime, sprime] = this.get_transition( s, this.t[k] );
-            while( pprime - kprime <= p - k ) {
+            var [kprime, pprime, sprime] = this.get_transition( s, this.t[k] );
+            while( pprime - kprime  <= p - k ) {
                 k = k + pprime - kprime + 1;
                 s = sprime;
                 if( k <= p )
@@ -89,7 +88,7 @@ export class SuffixTree {
         while( this.t[i+1] != 0 ) {
             i += 1;
             [s, k] = this.update( s, k, i );
-            [s, k] = this.cannonize( s, i, k );
+            [s, k] = this.cannonize( s, k, i );
         }
     }
 }
