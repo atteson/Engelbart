@@ -2,11 +2,12 @@
     "configurations": [
         {
             "type": "pwa-chrome",
-            "name": "test",
+            "name": "test suffix tree",
             "request": "launch",
-            "url": "http://localhost/~atteson/src/test/index.html",
+            "url": "http://localhost/~atteson/src/modules/test_suffix_tree.html",
             "pathMapping": {
                 "/~atteson/src": "${workspaceFolder}/src"
-            }
+            },
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         }
      ] }
