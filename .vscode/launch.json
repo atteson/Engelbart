@@ -4,10 +4,20 @@
             "type": "pwa-chrome",
             "name": "test suffix tree",
             "request": "launch",
-            "url": "http://localhost/~atteson/src/modules/test_suffix_tree.html",
+            "url": "http://localhost/~atteson/Engelbart/tests/test_suffix_tree.html",
             "pathMapping": {
-                "/~atteson/src": "${workspaceFolder}/src"
+                "/~atteson/Engelbart": "${workspaceFolder}/src"
             },
             "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        }
+        },
+        {
+            "type": "pwa-chrome",
+            "name": "term rewriting",
+            "request": "launch",
+            "url": "http://localhost/~atteson/Engelbart/scripts/term_rewriting.html",
+            "pathMapping": {
+                "/~atteson/Engelbart": "${workspaceFolder}/src"
+            },
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        }   
      ] }

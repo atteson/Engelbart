@@ -14,20 +14,14 @@ var variablesmath
 var variablesbox
 var newvariable
 
-var tokens = new Trie()
-
 function addVariable(event) {
     if( event.keyCode == 13 ) {
         var variable = newvariable.value
 
         newvariable.value = ""
-        if (tokens.hasprefix(variable))
-            alert( "Prefix of variable already exists!")
-        else {
-            tokens.push(variable)
-            variables.push( variable )
-            window.UpdateVariables()
-        }
+
+        variables.push( variable )
+        window.UpdateVariables()
     }
 }
 
