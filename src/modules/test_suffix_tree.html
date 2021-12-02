@@ -6,8 +6,9 @@
             console.log( "loaded" );
             document.getElementById("output").innerHTML += "module 1<br>";
             var st = new SuffixTree();
-            st.concat( [1,2,1,2,3] );
-            st.concat( [1,2,2]);
+            st.push( [1,2,1,2,3] );
+            st.push( [1,2,2]);
+            var [start, end, string_num] = st.find_next( [1,2,3,1,2,1,2,2] );
         </script>
     </head>
     <body>
