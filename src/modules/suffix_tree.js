@@ -8,6 +8,7 @@ export class SuffixTree {
         this.gprime = [];
         this.fprime = [undefined, 0];
         this.t = [];
+        this.final = [];
     }
 
     new_node() {
@@ -29,9 +30,11 @@ export class SuffixTree {
             return undefined;
     }
 
-    update( s, k, i) {
+    update( s, k, i, final_state ) {
         var oldr = this.root;
         var [end_point, r] = this.test_and_split( s, k, i-1, this.t[i] );
+        if) !end_point )
+            final_state = r;
         while( !end_point ) {
             var rprime = this.new_node();
             this.set_transition( r, i, infinity, rprime );
@@ -43,7 +46,7 @@ export class SuffixTree {
         }
         if( oldr != r )
             this.fprime[oldr] = s;
-        return [s,k]
+        return [s, k, final_state]
     }
 
     test_and_split( s, k, p, t ) {
@@ -85,9 +88,10 @@ export class SuffixTree {
         var i = k-1;
         t.push( 0 );
         this.t = this.t.concat( t );
+        final_state = 1;
         while( this.t[i+1] != 0 ) {
             i += 1;
-            [s, k] = this.update( s, k, i );
+            [s, k, final_state] = this.update( s, k, i, final_state );
             [s, k] = this.cannonize( s, k, i );
         }
     }
