@@ -1,10 +1,12 @@
-
 // variables are in the first list
 // operators are in the second list
 
 var variables = [];
 var operators = [];
 var rules = [];
+
+import { SuffixTree } from "../modules/suffix_tree.js";
+var tokenizer = new SuffixTree();
 
 function addVariable(event) {
     if( event.keyCode == 13 ) {
@@ -19,8 +21,12 @@ function addVariable(event) {
         MathJax.typesetClear([variablesmath]);
         variablesmath.innerHTML = "$$" + variables.join(",") + "$$";
         MathJax.typeset([variablesmath]);
+
+        tokenizer.push( variable );
     }
 }
+
+document.getElementById("newvariable").addEventListener("keyup",addVariable);
 
 function addOperator(event) {
     if( event.keyCode == 13 ) {
@@ -45,3 +51,4 @@ function addRule(event) {
         MathJax.typeset( [cell] );
     }
 }
+

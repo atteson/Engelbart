@@ -139,6 +139,7 @@ export class SuffixTree {
             this.set_transition( r, this.t.length-1, infinity, rprime );
         }
         this.final_states[r] = string_num;
+        return string_num;
     }
 
     find_next( t, start = 0 ) {
