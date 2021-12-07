@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <div id="test">
+        </div>
+        <script type="module">
+            import "../submodules/MathJax-src/es5/tex-chtml.js";
+            document.getElementById("test").innerHTML = "test: " + String(typeof MathJax);
+        </script>
+    </body>
+</html>

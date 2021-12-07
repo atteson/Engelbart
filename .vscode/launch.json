@@ -19,5 +19,25 @@
                 "/~atteson/Engelbart": "${workspaceFolder}/src"
             },
             "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        }   
-     ] }
+        },   
+        {
+            "type": "pwa-chrome",
+            "name": "regex",
+            "request": "launch",
+            "url": "http://localhost/~atteson/Engelbart/tests/test_regex.html",
+            "pathMapping": {
+                "/~atteson/Engelbart": "${workspaceFolder}/src"
+            },
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        },   
+        {
+            "type": "pwa-chrome",
+            "name": "mathjax",
+            "request": "launch",
+            "url": "http://localhost/~atteson/Engelbart/tests/test_mathjax.html",
+            "pathMapping": {
+                "/~atteson/Engelbart": "${workspaceFolder}/src"
+            },
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        } 
+    ] }

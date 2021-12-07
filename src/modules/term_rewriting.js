@@ -6,6 +6,7 @@ var operators = [];
 var rules = [];
 
 import { SuffixTree } from "../modules/suffix_tree.js";
+import "../submodules/MathJax-src/es5/tex-chtml.js"
 var tokenizer = new SuffixTree();
 
 function addVariable(event) {
@@ -22,7 +23,7 @@ function addVariable(event) {
         variablesmath.innerHTML = "$$" + variables.join(",") + "$$";
         MathJax.typeset([variablesmath]);
 
-        tokenizer.push( variable );
+        //tokenizer.push( variable );
     }
 }
 
