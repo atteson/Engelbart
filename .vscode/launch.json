@@ -2,7 +2,7 @@
     "configurations": [
         {
             "type": "pwa-chrome",
-            "name": "test suffix tree",
+            "name": "suffix tree",
             "request": "launch",
             "url": "http://localhost/~atteson/Engelbart/tests/test_suffix_tree.html",
             "pathMapping": {
@@ -39,5 +39,24 @@
                 "/~atteson/Engelbart": "${workspaceFolder}/src"
             },
             "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        } 
-    ] }
+        },
+        {
+            "type": "pwa-chrome",
+            "name": "test",
+            "request": "launch",
+            "url": "http://localhost/~atteson/Engelbart/tests/test.html",
+            "pathMapping": {
+                "/~atteson/Engelbart": "${workspaceFolder}/src"
+            },
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        },
+        {
+            "type": "pwa-chrome",
+            "name": "nfa",
+            "request": "launch",
+            "url": "http://localhost/~atteson/Engelbart/tests/test_nfa.html",
+            "pathMapping": {
+                "/~atteson/Engelbart": "${workspaceFolder}/src"
+            },
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        },    ] }
