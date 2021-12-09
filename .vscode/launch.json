@@ -50,13 +50,4 @@
             },
             "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         },
-        {
-            "type": "pwa-chrome",
-            "name": "nfa",
-            "request": "launch",
-            "url": "http://localhost/~atteson/Engelbart/tests/test_nfa.html",
-            "pathMapping": {
-                "/~atteson/Engelbart": "${workspaceFolder}/src"
-            },
-            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        },    ] }
+    ] }

@@ -1,7 +1,7 @@
 const infinity = Number.MAX_SAFE_INTEGER
   
 export class SuffixTree {
-    constructor() {
+    constructor( max_input_token = undefined ) {
         this.bottom = 0;
         this.root = 1;
         this.num_nodes = 1; 
@@ -12,6 +12,9 @@ export class SuffixTree {
         this.token_lengths = [];
         this.final_states = [];
         this.string_lengths = [];
+        if( max_input_token != undefined ) {
+            this.token_lengths[max_input_token] = undefined;
+        }
     }
 
     add_token( length ) {
@@ -142,11 +145,25 @@ export class SuffixTree {
         return string_num;
     }
 
+    push_string( t ) {
+        var u = [];
+        for( var i = 0; i < t.length; i++ ) {
+            u.push( t.charCodeAt(i) );
+        }
+        return this.push( u );
+    }
+
     find_next( t, start = 0 ) {
         var s = this.root;
         var i = start;
         outer: while( i < t.length ) {
-            var [k, p, sprime] = this.get_transition( s, t[i] );
+            var next = this.get_transition( s, t[i] );
+            var k, p, sprime;
+            if( next == undefined ) {
+                s = this.fprime[s];
+                continue outer;
+            }
+            [k, p, sprime] = next;
             var iprime = i;
             var kprime = k;
             while( kprime <= p ) {
@@ -169,5 +186,13 @@ export class SuffixTree {
             }
         }
         return [i, i, 0];
+    }
+
+    find_next_string( t, start = 0 ) {
+        var u = [];
+        for( var i = 0; i < t.length; i++ ) {
+            u.push( t.charCodeAt(i) );
+        }
+        return this.find_next( u, start );
     }
 }

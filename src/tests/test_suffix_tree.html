@@ -1,19 +1,19 @@
 <html>
     <head>
         <script type="module">
-            console.log(window.location.pathname);
             import { SuffixTree } from '../modules/suffix_tree.js';
-            console.log( "loaded" );
-            document.getElementById("output").innerHTML += "module 1<br>";
+
+
             var st = new SuffixTree();
-            st.push( [1,2,1,2,3] );
-            st.push( [1,2,2]);
-            var [start, end, string_num] = st.find_next( [1,2,3,1,2,1,2,2] );
+            st.push_string( "abd" );
+            st.push_string( "abc" );
+            var [start, end, string_num] = st.find_next_string( "ababc" );
+
+            document.getElementById("output").innerHTML += String(start) + " " + String(end);
         </script>
     </head>
     <body>
         <div id="output">
-            This is the output<br>
         </div>
     </body>
 </html>
