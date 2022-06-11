@@ -7,7 +7,7 @@
             var st = new SuffixTree();
             st.push_string( "abd" );
             st.push_string( "abc" );
-            var [start, end, string_num] = st.find_next_string( "ababc" );
+            var [start, end, string_num] = st.find_next_string( "ababe" );
 
             document.getElementById("output").innerHTML += String(start) + " " + String(end);
         </script>
