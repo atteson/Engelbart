@@ -160,7 +160,11 @@ export class SuffixTree {
             var next = this.get_transition( s, t[i] );
             var k, p, sprime;
             if( next == undefined ) {
-                s = this.fprime[s];
+                if( s == this.root ) {
+                    i++;
+                } else {
+                    s = this.fprime[s];
+                }
                 continue outer;
             }
             [k, p, sprime] = next;
