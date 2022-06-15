@@ -6,3 +6,7 @@
 .outline {
     outline: thin solid;
 }
+
+.red {
+    outline-color: red;
+}

@@ -11,6 +11,12 @@ import { SuffixTree } from "../modules/suffix_tree.js";
 import "../submodules/MathJax-src/es5/tex-chtml.js"
 var tokenizer = new SuffixTree( 255 );
 
+function arrowKeys(event) {
+    console.log(event.keyCode);
+}
+
+document.addEventListener("keyup",arrowKeys);
+
 function addVariable(event) {
     if( event.keyCode == 13 ) {
         var newvariable = document.getElementById("newvariable");
@@ -77,6 +83,12 @@ function addOperator(event) {
          </select>
         `;
         associativitycell.setAttribute("align","right");
+    } else if (event.keyCode== 40) {
+        var rows = document.getElementById("operators").getElementsByTagName("tr");
+        if( rows.length > 1) {
+            rows[1].focus();
+            rows[1].setAttribute("class","outline red");
+        }
     }
 }
 
