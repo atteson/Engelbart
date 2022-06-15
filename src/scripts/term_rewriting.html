@@ -5,7 +5,7 @@
 		<script type="module" src="../modules/term_rewriting.js"></script>
 	</head>
     <body>
-		<table class="bordered">
+		<table>
 			<tr><td>
 			<table class="bordered">
 				<tr><td>
@@ -28,14 +28,12 @@
 			<tr><td>
 			<table class="bordered">
 				<tr><td>
-				<table id="operators">
-					<tr><td><b>Operators</b></td><td><b>Associativity</b></td></tr>
-					<td><input type="text" id="operator"/></td>
-					<td><select id="associativity">
-						<option>left</option>
-						<option>right</option>
-					</select></td>
-					</tr>
+				<table>
+					<tr><td><b>Operators</b></td></tr>
+					<td><input type="text" id="operator"/></td></tr>
+					<tr><td><table id="operators" class="bordered">
+						<tr><td>Operator</td><td>Associativity</td></tr>
+					</table></td></tr>
 				</table>
 				</td></tr>
 			</table>

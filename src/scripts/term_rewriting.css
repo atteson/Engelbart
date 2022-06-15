@@ -2,3 +2,7 @@
 .bordered {
     border: 1px solid black;
 }
+
+.outline {
+    outline: thin solid;
+}

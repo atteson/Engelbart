@@ -58,17 +58,25 @@ function addOperator(event) {
 
          production_rules.push( tokens );
 
-        var table = document.getElementById( "operators" );
-        var row = table.insertRow();
+        var table = document.getElementById( "operators" ).getElementsByTagName("tbody")[0];
+        var row = document.createElement("tr");
+        table.appendChild(row);
+        row.setAttribute("class","outline");
 
-        var operatorcell = row.insertCell();
+        var operatorcell = document.createElement("td");
+        row.appendChild(operatorcell);
         operatorcell.innerHTML = "$$" + operator + "$$";
         MathJax.typeset( [operatorcell] );
-        
-        var associativitycell = row.insertCell();
-        var associativity = document.getElementById("associativity").value;
-        associativitycell.innerHTML = associativity;
-        associativities.push( associativity );
+
+        var associativitycell = document.createElement("td");
+        row.appendChild(associativitycell);
+        associativitycell.innerHTML=`
+         <select>
+            <option value="left">left</option>
+            <option value="right">right</option>
+         </select>
+        `;
+        associativitycell.setAttribute("align","right");
     }
 }
 
