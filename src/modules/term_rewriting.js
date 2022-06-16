@@ -112,7 +112,7 @@ function addOperator() {
     var row = document.createElement("tr");
     table.appendChild(row);
     var l = table.children.length;
-    var neighbor = l == 2 ? newitem : table.children[l-1];
+    var neighbor = l == 2 ? newitem : table.children[l-2];
 
     addKeyListener( neighbor, 40, activateFunction( neighbor, row ));
     addKeyListener( row, 38, activateFunction( row, neighbor ));       
