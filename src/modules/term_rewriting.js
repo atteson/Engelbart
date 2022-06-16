@@ -6,16 +6,64 @@ var connectors = new Map();
 var production_rules = [];
 var associativities = [];
 var rules = [];
+var active_element;
 
 import { SuffixTree } from "../modules/suffix_tree.js";
 import "../submodules/MathJax-src/es5/tex-chtml.js"
 var tokenizer = new SuffixTree( 255 );
 
-function arrowKeys(event) {
-    console.log(event.keyCode);
+function addEventListener( element, event, listener ) {
+    element.addEventListener(event, listener);
+    if( !element.hasOwnProperty("eventListeners")){
+        element.eventListeners = new Map();
+    }
+    element.eventListeners.set( event, listener );
 }
 
-document.addEventListener("keyup",arrowKeys);
+function select(event) {
+    if( !(event.path[0].hasOwnProperty("eventListeners") && event.path[0].eventListeners.has("keyup")) &&
+     active_element != undefined ) {
+        switch(event.keyCode) {
+            case 40:
+                active_element.classList.remove("red");
+                var parent = active_element.parentNode;
+                var i = 0;
+                while(parent.children[i] != active_element) {
+                    i++;
+                }
+                if( i+1 < parent.children.length ) {
+                    active_element = parent.children[i+1];
+                    active_element.classList.add("red");
+                }
+                break;
+            case 38:
+                active_element.classList.remove("red");
+                var parent = active_element.parentNode;
+                var i = 0;
+                while(parent.children[i] != active_element){
+                    i++;
+                }
+                if( i > 1 ) {
+                    active_element = parent.children[i-1];
+                    active_element.classList.add("red");
+                } else {
+                    document.getElementById("operator").focus();
+                }
+                break;
+        }
+    }
+}
+
+addEventListener(document,"keyup",select);
+
+function focus(event) {
+    if( active_element !== undefined ) {
+        active_element.classList.remove("red");
+        active_element = undefined;
+    }
+}
+
+addEventListener(document,"focusin",focus);
 
 function addVariable(event) {
     if( event.keyCode == 13 ) {
@@ -32,7 +80,7 @@ function addVariable(event) {
         MathJax.typeset([variablesmath]);}
 }
 
-document.getElementById("newvariable").addEventListener("keyup",addVariable);
+addEventListener(document.getElementById("newvariable"),"keyup",addVariable);
 
 function addOperator(event) {
     if( event.keyCode == 13 ) {
@@ -84,15 +132,17 @@ function addOperator(event) {
         `;
         associativitycell.setAttribute("align","right");
     } else if (event.keyCode== 40) {
+        var operator = document.getElementById("operator");
+        operator.blur();
         var rows = document.getElementById("operators").getElementsByTagName("tr");
         if( rows.length > 1) {
-            rows[1].focus();
-            rows[1].setAttribute("class","outline red");
+            rows[1].classList.add("red");
+            active_element = rows[1];
         }
     }
 }
 
-document.getElementById("operator").addEventListener("keyup",addOperator)
+addEventListener(document.getElementById("operator"),"keyup",addOperator);
 
 function addRule(event) {
     if( event.keyCode == 13 ) {
