@@ -19,46 +19,51 @@ function addKeyListener( element, key, listener ) {
     element.keyListeners.set( key, listener );
 }
 
+function objectMapHas( object, key1, key2 ) {
+    return object.hasOwnProperty( key1 ) && object[key1].has( keys2 );
+}
+
 function checkAndRunKeyListener( element, key ) {
-    if( element.hasOwnProperty( "keyListeners" ) && element.keyListeners.has( key ) ) {
+    if( objectMapHas( element, "keyListeners", key ) ) {
         element.keyListeners.get( key )();
         return true;
     }
     return false;
 }
 
+var focusTagSet = new Set(["INPUT"]);
+
+function activate( from, to ) {
+    if( focusTagSet.has( from.tagName )) {
+        from.blur();
+    } else {
+        from.classList.remove("red");
+        active_element = undefined;
+    }
+    if( focusTagSet.has( to.tagName )) {
+        to.focus();
+    } else {
+        to.classList.add("red");
+        active_element = to;
+    }
+}
+
 function keyListener( event ) {
-    if( !checkAndRunKeyListener( event.target, event.keyCode ) && active_element !== undefined ) {
-        checkAndRunKeyListener( active_element, event.keyCode );
+    var key = event.keyCode;
+    if( objectMapHas( active_element, "keyListeners", key ) ) {
+        active_element.keyListeners.get( key )();
+    } else if( key >= 37 && key <= 40 && objectMapHas( acitve_element, "neighbors", key )) {
+        activate( active_element, active_element.neighbors.get( key ) );
     }
 }
 
 document.addEventListener("keyup",keyListener);
 
-var focusTagSet = new Set(["INPUT"]);
-
-function activateFunction( from, to ) {
-    return () => {
-        if( focusTagSet.has( from.tagName )) {
-            from.blur();
-        } else {
-            from.classList.remove("red");
-            active_element = undefined;
-        }
-        if( focusTagSet.has( to.tagName )) {
-            to.focus();
-        } else {
-            to.classList.add("red");
-            active_element = to;
-        }
-    }
-}
-
 function focus(event) {
     if( active_element !== undefined ) {
         active_element.classList.remove("red");
-        active_element = undefined;
     }
+    active_element = event.target;
 }
 
 document.addEventListener("focusin",focus);
