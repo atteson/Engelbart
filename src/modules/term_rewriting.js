@@ -6,7 +6,7 @@ var connectors = new Map();
 var production_rules = [];
 var associativities = [];
 var rules = [];
-var active_element;
+var active_element = undefined;
 
 import { SuffixTree } from "../modules/suffix_tree.js";
 import "../submodules/MathJax-src/es5/tex-chtml.js"
@@ -20,7 +20,7 @@ function addKeyListener( element, key, listener ) {
 }
 
 function objectMapHas( object, key1, key2 ) {
-    return object.hasOwnProperty( key1 ) && object[key1].has( keys2 );
+    return object.hasOwnProperty( key1 ) && object[key1].has( key2 );
 }
 
 function checkAndRunKeyListener( element, key ) {
@@ -38,21 +38,27 @@ function activate( from, to ) {
         from.blur();
     } else {
         from.classList.remove("red");
-        active_element = undefined;
     }
     if( focusTagSet.has( to.tagName )) {
         to.focus();
     } else {
         to.classList.add("red");
-        active_element = to;
     }
+    active_element = to;
+}
+
+function addNeighbor( object, key, neighbor ) {
+    if( !object.hasOwnProperty( "neighbors" ) ) {
+        object.neighbors = new Map();
+    }
+    object.neighbors.set( key, neighbor );
 }
 
 function keyListener( event ) {
     var key = event.keyCode;
     if( objectMapHas( active_element, "keyListeners", key ) ) {
         active_element.keyListeners.get( key )();
-    } else if( key >= 37 && key <= 40 && objectMapHas( acitve_element, "neighbors", key )) {
+    } else if( key >= 37 && key <= 40 && objectMapHas( active_element, "neighbors", key )) {
         activate( active_element, active_element.neighbors.get( key ) );
     }
 }
@@ -119,8 +125,8 @@ function addOperator() {
     var l = table.children.length;
     var neighbor = l == 2 ? newitem : table.children[l-2];
 
-    addKeyListener( neighbor, 40, activateFunction( neighbor, row ));
-    addKeyListener( row, 38, activateFunction( row, neighbor ));       
+    addNeighbor( neighbor, 40, row );
+    addNeighbor( row, 38, neighbor );       
 
     row.setAttribute("class","outline");
 
